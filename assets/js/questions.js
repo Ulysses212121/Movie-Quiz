@@ -27,3 +27,7 @@ var questions = [
       answer: "Tom Hardy",
     },
   ];
+
+//   export {
+//       questions
+//   };
