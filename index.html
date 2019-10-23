@@ -22,8 +22,9 @@
         </div>
     </div>
         <h1>Movie Quiz</h1>
-        <h4>Can you beat the clock?</h4>
+        <h4 id="question">Can you beat the clock?</h4>
         <ul id="question-list"></ul>
+        <ul id="highscore-list"></ul>
         <div class="buttons">
             <button class="btn" id="start-btn">
                 Start
@@ -31,6 +32,13 @@
             <button class="btn" id="high-scores-btn">
                 High Scores
             </button>
+            <div class="form-group">
+                <input class="form-control" type="text" id="highScoreInput" placeholder="Enter Name" style="display:none">
+            </input>
+            <button class="btn" id="submit" style="display:none">
+                    Submit Score
+            </button>
+        </div>
         </div>
     </div>
     
