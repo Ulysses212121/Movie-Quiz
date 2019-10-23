@@ -18,4 +18,6 @@ A quiz based on popular movies. The parameters of the quiz are
 - Javascript
 
 ### Screenshots
-![] (assets/images/Quiz-home.png "Quiz-Home")
+![Quiz Home](assets/images/Quiz-home.png)
+![Quiz Question](assets/images/Quiz-Question.png)
+![Quiz HighScore](assets/images/Quiz-HighScore.png)
