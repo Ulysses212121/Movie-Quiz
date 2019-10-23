@@ -14,17 +14,18 @@
 <body>
     <div class="container">
         <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <img src="assets/images/film-reel1.png" alt="film reel image">
+            <div class="col-md-8 offset-md-2">
+                <img src="assets/images/film-reel1.png" alt="film reel image">
+            </div>
+            <div class="col-md-2">
+                <div id="counter">75</div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <div id="counter">75</div>
-        </div>
-    </div>
         <h1>Movie Quiz</h1>
-        <h4 id="question">Can you beat the clock?</h4>
+        <h3 id="scoreTitle" style="display:none">High Scores</h3>
+        <ul class="list-group" id="highscore-list"></ul>
+        <h3 id="question">Can you beat the clock?</h3>
         <ul id="question-list"></ul>
-        <ul id="highscore-list"></ul>
         <div class="buttons">
             <button class="btn" id="start-btn">
                 Start
@@ -33,15 +34,16 @@
                 High Scores
             </button>
             <div class="form-group">
-                <input class="form-control" type="text" id="highScoreInput" placeholder="Enter Name" style="display:none">
-            </input>
-            <button class="btn" id="submit" style="display:none">
+                <input class="form-control" type="text" id="highScoreInput" placeholder="Enter Name"
+                    style="display:none">
+                </input>
+                <button class="btn" id="submit" style="display:none">
                     Submit Score
-            </button>
-        </div>
+                </button>
+            </div>
         </div>
     </div>
-    
+
     <script src="assets/js/questions.js"></script>
     <script src="assets/js/script.js"></script>
 </body>

@@ -10,7 +10,7 @@ var buttonDiv = document.querySelector(".buttons");
 var submitBtn = document.getElementById("submit");
 var nameInput = document.getElementById("highScoreInput");
 var highScoreList = document.getElementById("highscore-list");
-
+var highScoreTitle = document.getElementById("scoreTitle");
 
 
 var i = 0;
@@ -59,12 +59,41 @@ function questionGen() {
 
 }
 
-// function highScoreGen () {
+function myScore() {
+    submitBtn.style.display = "inline-block";
+    nameInput.style.display = "inline-block";
+    nameInput.value = "";
+    question.innerHTML = "You're Score: <br />" + timeleft;
+}
 
-// }
+function storeHighScore() {
+    scores = {name: nameInput.value.trim().toUpperCase(), score: timeleft + 1 };
+    userScore.push(scores);
+    userScore.sort(function (a, b) {return b.score - a.score});
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+    let element = JSON.parse(localStorage.getItem("userScore"));
+    var topThree = element.slice(0, 3);
+    console.log(topThree);
 
+    for (var x = 0; x < topThree.length; x++) {
 
+        var li = document.createElement("li");
+        li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
+        if (userScore[x].name === "") {
+            li.textContent = "player " + (x+1);
+        } else {
+        li.textContent = userScore[x].name;
+        }
+        highScoreList.appendChild(li);
+        
+        var span = document.createElement("span");
+        span.setAttribute("class", "badge badge-primary badge-pill")
+        span.textContent = userScore[x].score;
+        li.appendChild(span);
+        }
+        highScoreList.style.display = "inline-block";
 
+}
 
 questionList.addEventListener("click", function (event) {
     var element = event.target;
@@ -75,6 +104,8 @@ questionList.addEventListener("click", function (event) {
 
         if (index === questions[i].answer) {
             element.style.backgroundColor = "green";
+            element.style.color = "white";
+            element.style.border = "3px solid white";
             setTimeout(function () {
                 var child = questionList.lastElementChild;
 
@@ -95,75 +126,17 @@ questionList.addEventListener("click", function (event) {
                 } else {
                     questionGen();
                 }
-                console.log(i);
-                console.log(questions.length);
-
-
-                // }, 2000)
-            }, 0000)
-
+                }, 2000)
         }
         else {
             element.style.backgroundColor = "red";
             timeleft = timeleft - 5;
+            element.style.color = "white";
         }
     }
 });
 
 
-function myScore() {
-    submitBtn.style.display = "inline-block";
-    nameInput.style.display = "inline-block";
-    nameInput.value = "";
-    question.innerHTML = "You're Score: <br />" + timeleft;
-}
-
-
-
-
-// function getHighScore() {
-
-//     var users = JSON.parse(localStorage.getItem("userScore"));
-    // userScore.push(users);
-    // if (users !== null)  {
-    //     userScore = users;
-    // }
-    // console.log(storedNames.name);
-// }
-
-
-// function highScoreList() {
-//     console.log(userScore);
-    // for (var i = 0; i < userScore.length; i++) {
-    //     var li = document.createElement("li");
-    //     li.textContent = userScore.name;
-    //     highScoreList.appendChild(li);
-        
-        // var li = document.createElement("li");
-        // li.textContent = userScore.score;
-        // highScoreList.appendChild(li);
-
-    // }
-// }
-function storeHighScore() {
-    scores = {name: nameInput.value.trim(), score: timeleft + 1 };
-    userScore.push(scores);
-    userScore.sort(function (a, b) {return b.score - a.score});
-    localStorage.setItem("userScore", JSON.stringify(userScore));
-    // highScoreList();
-    for (var x = 0; x < userScore.length; x++) {
-        var li = document.createElement("li");
-        li.textContent = userScore[x].name;
-        highScoreList.appendChild(li);
-
-        var li2 = document.createElement("li");
-        li2.textContent = userScore[x].score;
-        highScoreList.appendChild(li2);
-        }
-        highScoreList.style.display = "inline-block";
-    console.log(scores);
-    console.log(userScore);
-}
 
 
 
@@ -172,9 +145,21 @@ startBtn.addEventListener("click", function () {
     questionGen();
     startBtn.style.display = "none";
     highScoreBtn.style.display = "none";
+    var child = highScoreList.lastElementChild;
+    counter.style.display = "block";
+
+    while (child) {
+
+
+        highScoreList.removeChild(child);
+        child = highScoreList.lastElementChild;
+
+    }
+    highScoreTitle.style.display = "none";
+
 });
 
-submitBtn.addEventListener("click", function (event) {
+submitBtn.addEventListener("click", function () {
     // event.defaultPrevented;
     if (nameInput === "") {
         return;
@@ -187,9 +172,9 @@ submitBtn.addEventListener("click", function (event) {
     nameInput.style.display = "none";
     question.innerText = "Play again?";
     startBtn.style.display = "inline-block";
-    highScoreBtn.style.display = "inline-block";
+    // highScoreBtn.style.display = "inline-block";
     timeleft = 75;
-
+    highScoreTitle.style.display = "block";
         
         
 });
