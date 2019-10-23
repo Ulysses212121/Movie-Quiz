@@ -28,6 +28,7 @@ var finalScore = "";
 // console.log(answer);
 function startTimer() {
     var downloadTimer = setInterval(function () {
+        counter.style.color = "white";
         timeleft--;
         counter.textContent = timeleft;
         if (timeleft <= 10) {
